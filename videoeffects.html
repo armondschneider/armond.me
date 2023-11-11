@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Overlays</title>
+    <style>
+        video {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px 0;
+        }
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <video id="video" playsinline></video>
+    <canvas id="overlay"></canvas>
+
+    <div>
+        <button onclick="toggleOverlay('text')">Text Overlay</button>
+        <button onclick="toggleOverlay('heatmap')">Heatmap Overlay</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const video = document.getElementById('video');
+            const overlay = document.getElementById('overlay');
+            const overlayCtx = overlay.getContext('2d');
+            let currentOverlay = null;
+
+            // Access user's camera
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then((stream) => {
+                    video.srcObject = stream;
+                })
+                .catch((error) => {
+                    console.error('Error accessing camera: ', error);
+                });
+
+            // Wait for the video metadata to be loaded
+            video.addEventListener('loadedmetadata', function () {
+                overlay.width = video.videoWidth;
+                overlay.height = video.videoHeight;
+            });
+
+            // Toggle between different overlays
+            window.toggleOverlay = function (overlayType) {
+                currentOverlay = overlayType;
+            };
+
+            // Apply overlays in real-time
+            function applyOverlay() {
+                if (!video.paused && !video.ended) {
+                    overlay.width = video.videoWidth;
+                    overlay.height = video.videoHeight;
+
+                    overlayCtx.clearRect(0, 0, overlay.width, overlay.height);
+
+                    if (currentOverlay === 'text') {
+                        // Add your text overlay logic here
+                        overlayCtx.font = '30px Arial';
+                        overlayCtx.fillStyle = 'white';
+                        overlayCtx.fillText('Your Text Here', 50, 50);
+                    } else if (currentOverlay === 'heatmap') {
+                        // Add your heatmap overlay logic here
+                        // Example: Draw a red rectangle representing a heatmap
+                        overlayCtx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+                        overlayCtx.fillRect(0, 0, overlay.width, overlay.height);
+                    }
+                }
+
+                requestAnimationFrame(applyOverlay);
+            }
+
+            // Start applying overlays
+            applyOverlay();
+        });
+    </script>
+</body>
+</html>
