@@ -4,10 +4,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+    <script type="module" src="src/play.armond.js"></script>
     <title>Armond Schneider</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+      body {
+        cursor: none;
+      }
+
+      .custom-cursor {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background-color: black;
+        pointer-events: none;
+    }
+    a {
+      cursor: none;
+    }
         @font-face {
           font-family: 'IBM Plex Mono';
           font-style:  monospace;
@@ -121,6 +136,15 @@
     </style>
 </head>
 <body>
+  <div class="custom-cursor"></div>
+    <script>
+        document.addEventListener('mousemove', function (e) {
+            const cursor = document.querySelector('.custom-cursor');
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
+    </script>
+    
     <div class="container">
         <h1>Armond Schneider</h1>
         <p>Updated November 11, 2023</p>
@@ -138,30 +162,43 @@
             <li>
                 Passionate about creating personable user interfaces. 
             </li>
+          </ul>
+          <h2 id="aboutme">Now:</h2>
+          <ul>
             <li>
                 Founded: 
                 <span class="link"><a href="https://www.linkedin.com/company/withindex/">Index</a>,
                 </span>
                 where we design and (sometimes) develop apps 
                 <ul>
-                    <li>Now: Working on Dump, a new way to social media</li>
-                    <li>Past: Designed <span class="link"><a href="https://armond.xyz/hause/">Hause</a>,
-                    </span> a digital art gallery</li>
+                  <ul>
+        
+                    <li>Currently looking for a full time Product/UIUX position</li>
+                    <li>Working part-time at a startup, a new way to social media</li>
+                    <li>Desinging  a new way for kids to learn on web</li>
+                  </ul>
+                  <li>Designed <span class="link"><a href="https://armond.xyz/hause/">Hause</a>,
+                  </span> a digital art gallery</li>
                 </ul>
             </li>
-        </ul>
+          </ul>
+          <h2 id="aboutme">Past:</h2>
+          <ul>
+            <li>
+              Designed <span class="link"><a href="https://armond.xyz/hause/">Hause</a>, </span> a digital art gallery</li>
+          </ul>
         <br>
         <p>Where to find me:</p>
         <br>
         <ul>
             <li>
-                <span class="link"><a href="https://twitter.com/armondxyz">Twitter</a></span>
+              <span class="link"><a href="https://twitter.com/armondxyz">Twitter</a></span>
             </li>
             <li>
-                <span class="link"><a href="https://www.instagram.com/armmmond/">Instagram</a></span>
+              <span class="link"><a href="https://www.instagram.com/armmmond/">Instagram</a></span>
             </li>
             <li>
-                <span class="link"><a href="https://www.linkedin.com/in/armondschneider/">LinkedIn</a></span>
+              <span class="link"><a href="https://www.linkedin.com/in/armondschneider/">LinkedIn</a></span>
             </li>
         </ul>
         <br>
@@ -179,7 +216,7 @@
         <br>
         <br>
         <ul>
-            <a href="videoeffects.html">Click me for fun</a>
+            <a href="play.armond.html">Play</a>
         </ul>
     </div>
 </body>
